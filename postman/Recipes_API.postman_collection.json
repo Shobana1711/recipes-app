@@ -1,0 +1,567 @@
+{
+  "info": {
+    "name": "Recipes API",
+    "description": "CRUD API for managing recipes (Node.js, Express, Mongoose).\n\nSet the `baseUrl` collection variable (default http://localhost:5000). After running **Create Recipe**, the `recipeId` variable is saved automatically and used by the other requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "recipeId",
+      "value": "66b1f0c2a4d3e9b7c8a12345"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Recipe",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if (pm.response.code === 201) {",
+              "  pm.collectionVariables.set('recipeId', pm.response.json().data.id);",
+              "}",
+              "pm.test('Status is 201', () => pm.response.to.have.status(201));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/recipes",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "recipes"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Spaghetti Carbonara\",\n  \"description\": \"Classic Roman pasta with eggs, cheese and pancetta.\",\n  \"ingredients\": [\n    {\n      \"name\": \"Spaghetti\",\n      \"quantity\": \"200 g\"\n    },\n    {\n      \"name\": \"Pancetta\",\n      \"quantity\": \"100 g\"\n    },\n    {\n      \"name\": \"Eggs\",\n      \"quantity\": \"2\"\n    },\n    {\n      \"name\": \"Pecorino Romano\",\n      \"quantity\": \"50 g\"\n    }\n  ],\n  \"instructions\": [\n    \"Boil the spaghetti in salted water until al dente.\",\n    \"Fry the pancetta until crisp.\",\n    \"Whisk eggs with grated cheese.\",\n    \"Toss hot pasta with pancetta, then stir in the egg mixture off the heat.\"\n  ],\n  \"prepTime\": 10,\n  \"cookTime\": 15,\n  \"servings\": 2,\n  \"difficulty\": \"medium\",\n  \"category\": \"italian\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Creates a new recipe.\n\n**Required:** title (3–100 chars), ingredients (≥1 `{name, quantity}`), instructions (≥1 string).\n**Optional:** description, prepTime, cookTime (minutes), servings (≥1), difficulty (`easy|medium|hard`), category."
+      },
+      "response": [
+        {
+          "name": "201 Created",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Spaghetti Carbonara\",\n  \"description\": \"Classic Roman pasta with eggs, cheese and pancetta.\",\n  \"ingredients\": [\n    {\n      \"name\": \"Spaghetti\",\n      \"quantity\": \"200 g\"\n    },\n    {\n      \"name\": \"Pancetta\",\n      \"quantity\": \"100 g\"\n    },\n    {\n      \"name\": \"Eggs\",\n      \"quantity\": \"2\"\n    },\n    {\n      \"name\": \"Pecorino Romano\",\n      \"quantity\": \"50 g\"\n    }\n  ],\n  \"instructions\": [\n    \"Boil the spaghetti in salted water until al dente.\",\n    \"Fry the pancetta until crisp.\",\n    \"Whisk eggs with grated cheese.\",\n    \"Toss hot pasta with pancetta, then stir in the egg mixture off the heat.\"\n  ],\n  \"prepTime\": 10,\n  \"cookTime\": 15,\n  \"servings\": 2,\n  \"difficulty\": \"medium\",\n  \"category\": \"italian\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Recipe created successfully\",\n  \"data\": {\n    \"id\": \"66b1f0c2a4d3e9b7c8a12345\",\n    \"title\": \"Spaghetti Carbonara\",\n    \"description\": \"Classic Roman pasta with eggs, cheese and pancetta.\",\n    \"ingredients\": [\n      {\n        \"name\": \"Spaghetti\",\n        \"quantity\": \"200 g\"\n      },\n      {\n        \"name\": \"Pancetta\",\n        \"quantity\": \"100 g\"\n      },\n      {\n        \"name\": \"Eggs\",\n        \"quantity\": \"2\"\n      },\n      {\n        \"name\": \"Pecorino Romano\",\n        \"quantity\": \"50 g\"\n      }\n    ],\n    \"instructions\": [\n      \"Boil the spaghetti in salted water until al dente.\",\n      \"Fry the pancetta until crisp.\",\n      \"Whisk eggs with grated cheese.\",\n      \"Toss hot pasta with pancetta, then stir in the egg mixture off the heat.\"\n    ],\n    \"prepTime\": 10,\n    \"cookTime\": 15,\n    \"servings\": 2,\n    \"difficulty\": \"medium\",\n    \"category\": \"italian\",\n    \"createdAt\": \"2026-10-12T09:30:00.000Z\",\n    \"updatedAt\": \"2026-10-12T09:30:00.000Z\"\n  }\n}"
+        },
+        {
+          "name": "400 Validation Error",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"missing required fields\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"message\": \"Validation failed\",\n  \"errors\": [\n    \"Title is required\",\n    \"At least one ingredient is required\",\n    \"At least one instruction step is required\"\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get All Recipes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/recipes?search=carbonara&category=italian&difficulty=medium&page=1&limit=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "recipes"
+          ],
+          "query": [
+            {
+              "key": "search",
+              "value": "carbonara",
+              "description": "Case-insensitive title search",
+              "disabled": true
+            },
+            {
+              "key": "category",
+              "value": "italian",
+              "disabled": true
+            },
+            {
+              "key": "difficulty",
+              "value": "medium",
+              "disabled": true
+            },
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "10",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "Returns all recipes (newest first). Optional query params: `search`, `category`, `difficulty`, `page` (default 1), `limit` (default 10, max 100)."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"count\": 1,\n  \"total\": 1,\n  \"page\": 1,\n  \"pages\": 1,\n  \"data\": [\n    {\n      \"id\": \"66b1f0c2a4d3e9b7c8a12345\",\n      \"title\": \"Spaghetti Carbonara\",\n      \"description\": \"Classic Roman pasta with eggs, cheese and pancetta.\",\n      \"ingredients\": [\n        {\n          \"name\": \"Spaghetti\",\n          \"quantity\": \"200 g\"\n        },\n        {\n          \"name\": \"Pancetta\",\n          \"quantity\": \"100 g\"\n        },\n        {\n          \"name\": \"Eggs\",\n          \"quantity\": \"2\"\n        },\n        {\n          \"name\": \"Pecorino Romano\",\n          \"quantity\": \"50 g\"\n        }\n      ],\n      \"instructions\": [\n        \"Boil the spaghetti in salted water until al dente.\",\n        \"Fry the pancetta until crisp.\",\n        \"Whisk eggs with grated cheese.\",\n        \"Toss hot pasta with pancetta, then stir in the egg mixture off the heat.\"\n      ],\n      \"prepTime\": 10,\n      \"cookTime\": 15,\n      \"servings\": 2,\n      \"difficulty\": \"medium\",\n      \"category\": \"italian\",\n      \"createdAt\": \"2026-10-12T09:30:00.000Z\",\n      \"updatedAt\": \"2026-10-12T09:30:00.000Z\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Recipe By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/recipes/{{recipeId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "recipes",
+            "{{recipeId}}"
+          ]
+        },
+        "description": "Returns a single recipe by its MongoDB ObjectId."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes/66b1f0c2a4d3e9b7c8a12345",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes",
+                "66b1f0c2a4d3e9b7c8a12345"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"66b1f0c2a4d3e9b7c8a12345\",\n    \"title\": \"Spaghetti Carbonara\",\n    \"description\": \"Classic Roman pasta with eggs, cheese and pancetta.\",\n    \"ingredients\": [\n      {\n        \"name\": \"Spaghetti\",\n        \"quantity\": \"200 g\"\n      },\n      {\n        \"name\": \"Pancetta\",\n        \"quantity\": \"100 g\"\n      },\n      {\n        \"name\": \"Eggs\",\n        \"quantity\": \"2\"\n      },\n      {\n        \"name\": \"Pecorino Romano\",\n        \"quantity\": \"50 g\"\n      }\n    ],\n    \"instructions\": [\n      \"Boil the spaghetti in salted water until al dente.\",\n      \"Fry the pancetta until crisp.\",\n      \"Whisk eggs with grated cheese.\",\n      \"Toss hot pasta with pancetta, then stir in the egg mixture off the heat.\"\n    ],\n    \"prepTime\": 10,\n    \"cookTime\": 15,\n    \"servings\": 2,\n    \"difficulty\": \"medium\",\n    \"category\": \"italian\",\n    \"createdAt\": \"2026-10-12T09:30:00.000Z\",\n    \"updatedAt\": \"2026-10-12T09:30:00.000Z\"\n  }\n}"
+        },
+        {
+          "name": "404 Not Found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes/66b1f0c2a4d3e9b7c8a99999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes",
+                "66b1f0c2a4d3e9b7c8a99999"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"message\": \"Recipe not found\"\n}"
+        },
+        {
+          "name": "400 Invalid ID",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes/abc123",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes",
+                "abc123"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"message\": \"Invalid recipe ID format\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Recipe",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/recipes/{{recipeId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "recipes",
+            "{{recipeId}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Authentic Carbonara\",\n  \"servings\": 4,\n  \"difficulty\": \"hard\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Updates one or more fields of a recipe. Only the fields sent are changed; validation is applied."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes/66b1f0c2a4d3e9b7c8a12345",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes",
+                "66b1f0c2a4d3e9b7c8a12345"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Authentic Carbonara\",\n  \"servings\": 4,\n  \"difficulty\": \"hard\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Recipe updated successfully\",\n  \"data\": {\n    \"id\": \"66b1f0c2a4d3e9b7c8a12345\",\n    \"title\": \"Authentic Carbonara\",\n    \"description\": \"Classic Roman pasta with eggs, cheese and pancetta.\",\n    \"ingredients\": [\n      {\n        \"name\": \"Spaghetti\",\n        \"quantity\": \"200 g\"\n      },\n      {\n        \"name\": \"Pancetta\",\n        \"quantity\": \"100 g\"\n      },\n      {\n        \"name\": \"Eggs\",\n        \"quantity\": \"2\"\n      },\n      {\n        \"name\": \"Pecorino Romano\",\n        \"quantity\": \"50 g\"\n      }\n    ],\n    \"instructions\": [\n      \"Boil the spaghetti in salted water until al dente.\",\n      \"Fry the pancetta until crisp.\",\n      \"Whisk eggs with grated cheese.\",\n      \"Toss hot pasta with pancetta, then stir in the egg mixture off the heat.\"\n    ],\n    \"prepTime\": 10,\n    \"cookTime\": 15,\n    \"servings\": 4,\n    \"difficulty\": \"hard\",\n    \"category\": \"italian\",\n    \"createdAt\": \"2026-10-12T09:30:00.000Z\",\n    \"updatedAt\": \"2026-10-12T10:15:00.000Z\"\n  }\n}"
+        },
+        {
+          "name": "400 Validation Error",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes/66b1f0c2a4d3e9b7c8a12345",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes",
+                "66b1f0c2a4d3e9b7c8a12345"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"difficulty\": \"impossible\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"message\": \"Validation failed\",\n  \"errors\": [\n    \"Difficulty must be easy, medium or hard\"\n  ]\n}"
+        },
+        {
+          "name": "404 Not Found",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes/66b1f0c2a4d3e9b7c8a99999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes",
+                "66b1f0c2a4d3e9b7c8a99999"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Anything\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"message\": \"Recipe not found\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Delete Recipe",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/recipes/{{recipeId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "recipes",
+            "{{recipeId}}"
+          ]
+        },
+        "description": "Deletes a recipe by ID."
+      },
+      "response": [
+        {
+          "name": "200 OK",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes/66b1f0c2a4d3e9b7c8a12345",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes",
+                "66b1f0c2a4d3e9b7c8a12345"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Recipe deleted successfully\"\n}"
+        },
+        {
+          "name": "404 Not Found",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/recipes/66b1f0c2a4d3e9b7c8a99999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recipes",
+                "66b1f0c2a4d3e9b7c8a99999"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"message\": \"Recipe not found\"\n}"
+        }
+      ]
+    }
+  ]
+}
