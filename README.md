@@ -3,6 +3,9 @@
 
 A RESTful API for managing recipes using Node.js, Express.js, MongoDB, and Mongoose. The project follows the MVC architecture and includes CRUD operations, validation, and error handling.
 
+Live API: https://recipes-app-jf9m.onrender.com/api/recipes
+Postman Docs: https://documenter.getpostman.com/view/54478578/2sBYHURf3z
+
 ## Features
 
 - Create a new recipe

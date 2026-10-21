@@ -1,13 +1,13 @@
 {
   "info": {
     "name": "Recipes API",
-    "description": "CRUD API for managing recipes (Node.js, Express, Mongoose).\n\nSet the `baseUrl` collection variable (default http://localhost:5000). After running **Create Recipe**, the `recipeId` variable is saved automatically and used by the other requests.",
+    "description": "CRUD API for managing recipes (Node.js, Express, Mongoose).\n\nLive URL: https://recipes-app-jf9m.onrender.com\n\nThe `baseUrl` collection variable is set to the live Render deployment. For local testing change it to http://localhost:5000. Note: Render free tier sleeps when idle, so the first request may take 30-50 seconds. After running **Create Recipe**, the `recipeId` variable is saved automatically and used by the other requests.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:5000"
+      "value": "https://recipes-app-jf9m.onrender.com"
     },
     {
       "key": "recipeId",
